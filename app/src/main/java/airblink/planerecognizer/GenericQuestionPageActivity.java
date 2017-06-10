@@ -35,7 +35,7 @@ public class GenericQuestionPageActivity extends AppCompatActivity {
     protected class DownloadImageTask extends AsyncTask<Void, Integer, Long> {
         Bitmap bitmap = null;
         protected Long doInBackground(Void... urls) {
-            bitmap = DownloadImage("http://www.airbus-shop.com/mdules/homeslider/images/763bfe3f0449161ff3786f8d465213d9d72a94f2_a350.png");
+            bitmap = DownloadImage("http://www.airbus-shop.com/modules/homeslider/images/763bfe3f0449161ff3786f8d465213d9d72a94f2_a350.png");
 
             return null;
         }

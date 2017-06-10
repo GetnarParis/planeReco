@@ -7,18 +7,19 @@ import android.graphics.drawable.Drawable;
  */
 
 public class questionObj  {
-    public questionObj (String acManuf, String physicalDiff, int weight, boolean isOpen, int associatedDrawable) {
+    public questionObj (String acManuf, String physicalDiff, int weight, int isOpen,String questionString, int associatedDrawable) {
         this.acManuf = acManuf;
         this.physicalDiff = physicalDiff;
         this.weight= weight;
         this.isOpen= isOpen;
+        this.questionString = questionString;
         this.associatedDrawable = associatedDrawable;
     }
     private String acManuf;
     private String physicalDiff;
     private String questionString;
     public int weight;
-    public boolean isOpen;
+    public int isOpen;
     private int associatedDrawable;
 
     public int getAssociatedDrawable() {
@@ -39,5 +40,8 @@ public class questionObj  {
 
     public String getQuestionString() {
         return questionString;
+    }
+    public int getIsOpen() {
+        return isOpen;
     }
 }

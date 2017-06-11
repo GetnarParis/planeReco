@@ -25,11 +25,7 @@ public class questionModel {
 
        // AIRBUS
       /*  myModelTab.add(new questionObj ("airbus", "nose350",1,true, R.drawable.nose_a350));
-        myModelTab.add(new questionObj ("airbus", "nose320",1,true, R.drawable.nose_a320));
-        myModelTab.add(new questionObj ("airbus", "tail",1,true, R.drawable.tail_a320));
-        myModelTab.add(new questionObj ("airbus", "engine",1,true, 0));
-        myModelTab.add(new questionObj ("airbus", "ldgGear",1,true, 0));
-        myModelTab.add(new questionObj ("airbus", "tail",1,true, R.drawable.tail_a330));*/
+        */
 
 
 

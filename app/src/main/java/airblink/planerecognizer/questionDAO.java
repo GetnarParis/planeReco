@@ -78,11 +78,16 @@ public class questionDAO  {
     /**
      * @param id l'identifiant du métier à récupérer
      */
-    public int select() {
+    public questionObj select() {
 
-        Cursor c = mDb.rawQuery("SELECT * FROM " + TABLE_NAME, null );
+      /*  while (cursor.moveToNext()) {
+            // Faire quelque chose
+        }
+        cursor.close();*/
+        Cursor c = mDb.rawQuery("SELECT *," + ASSOCIATED_DRAWABLE+ ", MAX ("+WEIGHT+") FROM " + TABLE_NAME + " GROUP BY " + ASSOCIATED_DRAWABLE, null );
         c.moveToFirst();
-        int drawable = c.getInt(6);
-        return drawable;
+
+        questionObj qObj = new questionObj(c.getString(1),c.getString(2),c.getInt(3),c.getInt(5),c.getString(4),c.getInt(6));
+        return qObj;
     }
 }

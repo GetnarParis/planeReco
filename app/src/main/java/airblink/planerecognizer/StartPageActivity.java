@@ -2,11 +2,9 @@ package airblink.planerecognizer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +12,7 @@ import android.widget.Button;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class FullscreenActivity extends AppCompatActivity {
+public class StartPageActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -54,6 +52,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private boolean mVisible;
 
+   public static questionDAO qController;
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
@@ -65,17 +64,31 @@ public class FullscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_fullscreen);
+initiateDB();
         final Button loginButton = (Button) findViewById(R.id.discoverNew);
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FullscreenActivity.this, GenericQuestionPageActivity.class);
+
+                Intent intent = new Intent(StartPageActivity.this, GenericQuestionPageActivity.class);
                 startActivity(intent);
             }
         });
 
         mVisible = true;
+    }
+        private void initiateDB () {
+            qController = new questionDAO(getApplicationContext());
+            qController.add(new questionObj("airbus", "nose350", 1, 1, "Is the nose like this ?", R.drawable.nose_a350));
+            qController.add(new questionObj("airbus", "nose300", 1, 1, "Is the nose like this ?", R.drawable.nose_a300));
+            qController.add(new questionObj("airbus", "nose320", 1, 1, "Is the nose like this ?", R.drawable.nose_a320));
+            qController.add(new questionObj("airbus", "nose330", 1, 1, "Is the nose like this ?", R.drawable.nose_a330));
+            qController.add(new questionObj("airbus", "nose340", 1, 1, "Is the nose like this ?", R.drawable.nose_a340));
+            qController.add(new questionObj("airbus", "tail330", 1, 1, "Is the tail like this ?", R.drawable.tail_a330));
+            qController.add(new questionObj("airbus", "tail340", 1, 1, "Is the tail like this ?", R.drawable.nose_a320));
+
+    }
         // mControlsView = findViewById(R.id.fullscreen_content_controls);
        // mContentView = findViewById(R.id.fullscreen_content);
 
@@ -92,6 +105,6 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         //  findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-    }
 }
+
 

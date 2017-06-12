@@ -80,13 +80,25 @@ initiateDB();
     }
         private void initiateDB () {
             qController = new questionDAO(getApplicationContext());
-            qController.add(new questionObj("airbus", "nose350", 1, 1, "Is the nose like this ?", R.drawable.nose_a350));
-            qController.add(new questionObj("airbus", "nose300", 1, 1, "Is the nose like this ?", R.drawable.nose_a300));
-            qController.add(new questionObj("airbus", "nose320", 1, 1, "Is the nose like this ?", R.drawable.nose_a320));
-            qController.add(new questionObj("airbus", "nose330", 1, 1, "Is the nose like this ?", R.drawable.nose_a330));
-            qController.add(new questionObj("airbus", "nose340", 1, 1, "Is the nose like this ?", R.drawable.nose_a340));
-            qController.add(new questionObj("airbus", "tail330", 1, 1, "Is the tail like this ?", R.drawable.tail_a330));
-            qController.add(new questionObj("airbus", "tail340", 1, 1, "Is the tail like this ?", R.drawable.nose_a320));
+            qController.addQuestion(new questionObj("airbus", "nose","350","",1,  "Is the nose like this ?",1, R.drawable.nose_a350));
+            qController.addQuestion(new questionObj("airbus", "nose","300","",1,  "Is the nose like this ?",1, R.drawable.nose_a300));
+            qController.addQuestion(new questionObj("airbus", "nose","320","",1, "Is the nose like this ?",1, R.drawable.nose_a320));
+            qController.addQuestion(new questionObj("airbus", "nose","330","",1,  "Is the nose like this ?",1, R.drawable.nose_a330));
+            qController.addQuestion(new questionObj("airbus", "nose","340","",1,  "Is the nose like this ?",1, R.drawable.nose_a340));
+            qController.addQuestion(new questionObj("airbus", "tail","330","",1,  "Is the tail like this ?",1, R.drawable.tail_a330));
+            qController.addQuestion(new questionObj("airbus", "tail","320","",1,  "Is the tail like this ?",1, R.drawable.tail_a320));
+
+            qController.addAircraft(new aircraftObj("airbus","300","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","310","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","318","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","319","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","320","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","321","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","330","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","340","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","350","",1, R.drawable.tail_a320));
+            qController.addAircraft(new aircraftObj("airbus","380","",1, R.drawable.tail_a320));
+
 
     }
         // mControlsView = findViewById(R.id.fullscreen_content_controls);

@@ -79,14 +79,16 @@ initiateDB();
         mVisible = true;
     }
         private void initiateDB () {
+
             qController = new questionDAO(getApplicationContext());
-            qController.addQuestion(new questionObj("airbus", "nose","350","",1,  "Is the nose like this ?",1, R.drawable.nose_a350));
-            qController.addQuestion(new questionObj("airbus", "nose","300","",1,  "Is the nose like this ?",1, R.drawable.nose_a300));
-            qController.addQuestion(new questionObj("airbus", "nose","320","",1, "Is the nose like this ?",1, R.drawable.nose_a320));
-            qController.addQuestion(new questionObj("airbus", "nose","330","",1,  "Is the nose like this ?",1, R.drawable.nose_a330));
-            qController.addQuestion(new questionObj("airbus", "nose","340","",1,  "Is the nose like this ?",1, R.drawable.nose_a340));
-            qController.addQuestion(new questionObj("airbus", "tail","330","",1,  "Is the tail like this ?",1, R.drawable.tail_a330));
-            qController.addQuestion(new questionObj("airbus", "tail","320","",1,  "Is the tail like this ?",1, R.drawable.tail_a320));
+            qController.resetDb();
+            qController.addQuestion(new questionObj("airbus", "350","","nose",1,  "Is the nose like this ?",1, R.drawable.nose_a350));
+            qController.addQuestion(new questionObj("airbus", "300","","nose",1,  "Is the nose like this ?",1, R.drawable.nose_a300));
+            qController.addQuestion(new questionObj("airbus", "320","","nose",1, "Is the nose like this ?",1, R.drawable.nose_a320));
+            qController.addQuestion(new questionObj("airbus","330","","nose",1,  "Is the nose like this ?",1, R.drawable.nose_a330));
+            qController.addQuestion(new questionObj("airbus", "340","","nose",1,  "Is the nose like this ?",1, R.drawable.nose_a340));
+            qController.addQuestion(new questionObj("airbus", "330","","tail",1,  "Is the tail like this ?",1, R.drawable.tail_a330));
+            qController.addQuestion(new questionObj("airbus", "320","","tail",1,  "Is the tail like this ?",1, R.drawable.tail_a320));
 
             qController.addAircraft(new aircraftObj("airbus","300","",1, R.drawable.tail_a320));
             qController.addAircraft(new aircraftObj("airbus","310","",1, R.drawable.tail_a320));

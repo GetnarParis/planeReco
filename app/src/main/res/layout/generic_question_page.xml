@@ -70,5 +70,18 @@
             />
     </LinearLayout>
 
+    <Button
+        android:background="@drawable/button"
+        android:textSize="10dip"
+        android:text="Go back to previous Start Page "
+        android:textColor="#FFFFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/buttonGoBackToStart"
+        android:textAlignment="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.18"
+        />
 
 </LinearLayout>

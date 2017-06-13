@@ -91,31 +91,62 @@ public class questionDAO  {
      */
     public questionObj select() {
         int nbrOfTableLine= 0;
-        Cursor c = mDbQuestion.rawQuery("SELECT *," + ASSOCIATED_DRAWABLE+ ", MAX ("+WEIGHT+") FROM " + TABLE_NAME_QUESTION + " GROUP BY " + ASSOCIATED_DRAWABLE, null );
-       // c.moveToFirst();
+        Cursor c = mDbQuestion.rawQuery("SELECT * " +" FROM " + TABLE_NAME_QUESTION +  " WHERE " + WEIGHT + "= (SELECT MAX(" + WEIGHT +") FROM "+ TABLE_NAME_QUESTION +")", null );
+
         nbrOfTableLine=  c.getCount();
-        Log.d ("nbrof line",String.valueOf(nbrOfTableLine));
+        Log.d ("nbr of line",String.valueOf(nbrOfTableLine));
         Random r = new Random();
         int rdmNbr = r.nextInt(nbrOfTableLine);
         c.moveToPosition(rdmNbr);
 
 
         questionObj qObj = new questionObj(c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getString(2),c.getInt(7),c.getInt(8));
+
+        Log.d ("model de la selection",String.valueOf(qObj.getAcManuf()));
         c.close();
         return qObj;
     }
 
     public void updateTablesWeight () {
-        Cursor c = mDbAC.rawQuery("SELECT " + WEIGHT+ " FROM " + TABLE_NAME_AIRCRAFT + " where ac_Model = ? " , new String[]{"350"});
+        Cursor c = mDbAC.rawQuery("SELECT *  FROM " + TABLE_NAME_AIRCRAFT + " where ac_model = ? " , new String[]{"350"});
         c.moveToFirst();
-        int weightToChange = c.getInt(0);
-        String s = String.valueOf(weightToChange);
-        Log.d ("test",s);
+        int nbrOfTableLine= 0;
+        nbrOfTableLine=  c.getCount();
+        Log.d ("poids de la update",String.valueOf(c.getInt(4)));
+        Log.d ("nbr of line update",String.valueOf(nbrOfTableLine));
+        int weightToChange = c.getInt(4);
         weightToChange= weightToChange+1;
+      //  Log.d ("poids",String.valueOf(weightToChange));
         ContentValues value = new ContentValues();
         value.put(WEIGHT,weightToChange);
         mDbAC.update(TABLE_NAME_AIRCRAFT, value, AC_MODEL + " = ?", new String[] {"350"});
-        mDbQuestion.update(TABLE_NAME_QUESTION, value, AC_MODEL  + " = ?", new String[] {"350"});
+        mDbQuestion.update(TABLE_NAME_QUESTION, value, AC_MODEL  + " = ? ", new String[] {"350"});
+
+        c.close();
+    }
+
+    public void resetWeightOfTables () {
+        Cursor c = mDbAC.rawQuery("SELECT * FROM " + TABLE_NAME_AIRCRAFT  , null);
+        while (c.moveToNext()) {
+            ContentValues value = new ContentValues();
+            value.put(WEIGHT,1);
+            mDbAC.update(TABLE_NAME_AIRCRAFT, value,WEIGHT  +" !=? ",  new String[] {"1"});
+        }
+        c.close();
+         c = mDbQuestion.rawQuery("SELECT * FROM " + TABLE_NAME_QUESTION  , null);
+        while (c.moveToNext()) {
+            ContentValues value = new ContentValues();
+            value.put(WEIGHT,1);
+            mDbQuestion.update(TABLE_NAME_QUESTION, value,WEIGHT  +" !=? ",  new String[] {"1"});
+        }
+        c.close();
+
+
+    }
+    public void resetDb () {
+
+        mDbQuestion.execSQL("delete from "+ TABLE_NAME_QUESTION);
+        mDbAC.execSQL("delete from "+ TABLE_NAME_AIRCRAFT);
 
     }
 }

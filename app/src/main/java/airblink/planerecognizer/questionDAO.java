@@ -19,6 +19,7 @@ public class questionDAO  {
 
     public static final String TABLE_NAME_QUESTION = "questions_db";
     public static final String TABLE_NAME_AIRCRAFT = "databaseAC_db";
+    public static final String DIFF_ID = "key";
     public static final String DIFF_KEY = "id";
     public static final String AC_MANUF = "manuf";
     public static final String AC_MODEL = "model";
@@ -114,7 +115,8 @@ public class questionDAO  {
     public void updateTablesWeight () {
 
 
-        Cursor c = mDbAC.rawQuery("SELECT *  FROM " + TABLE_NAME_AIRCRAFT + " where manuf = ? and " + AC_MODEL + "= ? and " + DIFF_KEY + " != ?" , new String[]{selected_AC_Manuf,selected_AC_Model,selected_Question_Id});
+      //  Cursor c = mDbAC.rawQuery("SELECT *  FROM " + TABLE_NAME_QUESTION + " where manuf = ? and " + AC_MODEL + "= ? and " + DIFF_KEY + " != ?" , new String[]{selected_AC_Manuf,selected_AC_Model,selected_Question_Id});
+        Cursor c = mDbQuestion.rawQuery("SELECT *  FROM " + TABLE_NAME_QUESTION,null);
         c.moveToFirst();
         int nbrOfTableLineModel= 0;
         nbrOfTableLineModel=  c.getCount();
@@ -124,15 +126,15 @@ public class questionDAO  {
         // mDbAC.update(TABLE_NAME_AIRCRAFT, value, AC_MANUF + " = ?" , new String[] {selected_AC_Manuf});
         mDbQuestion.update(TABLE_NAME_QUESTION, value, AC_MANUF  + " = ? and " + AC_MODEL + "= ?" , new String[] {selected_AC_Manuf,selected_AC_Model});
 
-        Cursor cSelected = mDbAC.rawQuery("SELECT *  FROM " + TABLE_NAME_AIRCRAFT + " where id = ?" , new String[]{selected_Question_Id});
+        Cursor cSelected = mDbQuestion.rawQuery("SELECT *  FROM " + TABLE_NAME_QUESTION + " where id = ?" , new String[]{selected_Question_Id});
         cSelected.moveToFirst();
         double weightSelected = 0;
         ContentValues valueSelected = new ContentValues();
-        value.put(WEIGHT,weightSelected);
+        valueSelected.put(WEIGHT,weightSelected);
         // mDbAC.update(TABLE_NAME_AIRCRAFT, value, AC_MANUF + " = ?" , new String[] {selected_AC_Manuf});
         mDbQuestion.update(TABLE_NAME_QUESTION, valueSelected, DIFF_KEY  + " = ?" , new String[] {selected_Question_Id});
 
-        Cursor cToUp = mDbAC.rawQuery("SELECT *  FROM " + TABLE_NAME_AIRCRAFT + " where manuf = ?" , new String[]{selected_AC_Manuf});
+        Cursor cToUp = mDbQuestion.rawQuery("SELECT *  FROM " + TABLE_NAME_QUESTION + " where manuf = ?" , new String[]{selected_AC_Manuf});
         cToUp.moveToFirst();
         int nbrOfTableLineToUp= 0;
         double weightToAdd;
@@ -146,7 +148,7 @@ public class questionDAO  {
        // mDbAC.update(TABLE_NAME_AIRCRAFT, value, AC_MANUF + " = ?" , new String[] {selected_AC_Manuf});
         mDbQuestion.update(TABLE_NAME_QUESTION, valueUp, AC_MANUF  + " != ? " , new String[] {selected_AC_Manuf});
 
-        Cursor cToDown = mDbAC.rawQuery("SELECT *  FROM " + TABLE_NAME_AIRCRAFT + " where manuf = ?" , new String[]{selected_AC_Manuf});
+        Cursor cToDown = mDbQuestion.rawQuery("SELECT *  FROM " + TABLE_NAME_QUESTION + " where manuf = ?" , new String[]{selected_AC_Manuf});
         cToUp.moveToFirst();
         int nbrOfTableLineToDown= 0;
         nbrOfTableLineToDown=  cToDown.getCount();

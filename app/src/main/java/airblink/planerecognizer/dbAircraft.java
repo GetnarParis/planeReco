@@ -8,13 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Alexandre on 12/06/2017.
  */
 public class dbAircraft extends SQLiteOpenHelper {
-    protected final static int VERSION = 1;
+    protected final static int VERSION = 2;
     // Le nom du fichier qui représente ma base
     protected final static String NOM = "databaseAC.db";
     public static final String AC_KEY = "id";
     public static final String AC_MANUF = "manuf";
-    public static final String AC_MODEL = "ac_model";
-    public static final String AC_VERSION = "ac_version";
+    public static final String AC_MODEL = "model";
+    public static final String AC_VERSION = "version";
     public static final String WEIGHT = "weight";
 
     public static final String ASSOCIATED_DRAWABLE = "drawable";

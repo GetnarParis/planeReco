@@ -9,13 +9,15 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class dbQuestion extends SQLiteOpenHelper {
-    protected final static int VERSION = 2;
+    protected final static int VERSION = 5;
     // Le nom du fichier qui représente ma base
     protected final static String NOM = "database.db";
+    public static final String DIFF_ID = "key";
+
     public static final String DIFF_KEY = "id";
     public static final String AC_MANUF = "manuf";
-    public static final String AC_MODEL = "ac_model";
-    public static final String AC_VERSION = "ac_version";
+    public static final String AC_MODEL = "model";
+    public static final String AC_VERSION = "version";
     public static final String PHYSICAL_DIFF = "physDiff";
     public static final String WEIGHT = "weight";
     public static final String IS_OPEN = "isOpen";
@@ -26,7 +28,8 @@ public class dbQuestion extends SQLiteOpenHelper {
     public static final String DIFF_TABLE_NAME = "questions_db";
     public static final String DIFF_TABLE_CREATE =
             "CREATE TABLE " + DIFF_TABLE_NAME + " (" +
-                    DIFF_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    DIFF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    DIFF_KEY + " INTEGER, " +
                     AC_MANUF + " TEXT, " +
                     AC_MODEL + " TEXT, " +
                     AC_VERSION + " TEXT, " +

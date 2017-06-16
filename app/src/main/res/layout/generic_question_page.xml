@@ -33,7 +33,7 @@
         <Button
             android:background="@drawable/button"
             android:textSize="10dip"
-            android:text="Yeah"
+            android:text="Yes"
             android:textColor="#FFFFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
         <Button
             android:background="@drawable/button"
             android:textSize="10dip"
-            android:text="Nah"
+            android:text="No"
             android:textColor="#FFFFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         <Button
             android:background="@drawable/button"
             android:textSize="10dip"
-            android:text="Dunno"
+            android:text="Don't know"
             android:textColor="#FFFFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

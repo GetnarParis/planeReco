@@ -33,7 +33,7 @@ public class dbQuestion extends SQLiteOpenHelper {
                     PHYSICAL_DIFF + " TEXT," +
                     WEIGHT + " REAL DEFAUlT 1," +
                     QUESTION_TEXT + " TEXT,"+
-                    IS_OPEN + " INTEGER DEFAULT 1," +
+                    IS_OPEN + " TEXT," +
 
                     ASSOCIATED_DRAWABLE + " INT);"
             ;

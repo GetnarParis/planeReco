@@ -7,7 +7,8 @@ import android.graphics.drawable.Drawable;
  */
 
 public class questionObj  {
-    public questionObj (String acManuf,String acModel, String acVersion, String physicalDiff,  int weight,String questionString, int isOpen, int associatedDrawable) {
+    public questionObj (int id, String acManuf,String acModel, String acVersion, String physicalDiff,  int weight,String questionString, int isOpen, int associatedDrawable) {
+        this.id = id;
         this.acManuf = acManuf;
         this.acModel = acModel;
         this.acVersion =acVersion;
@@ -17,7 +18,7 @@ public class questionObj  {
         this.questionString = questionString;
         this.associatedDrawable = associatedDrawable;
     }
-
+    private int id;
     private String acManuf;
     private String acModel;
     private String acVersion;
@@ -34,7 +35,9 @@ public class questionObj  {
     public int getWeight() {
         return weight;
     }
-
+    public int getId() {
+        return id;
+    }
     public String getAcManuf() {
         return acManuf;
     }

@@ -1,18 +1,27 @@
 package airblink.planerecognizer;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+
 
 
 /**
@@ -20,72 +29,78 @@ import java.net.URLConnection;
  */
 
 public class GenericQuestionPageActivity extends AppCompatActivity {
+   // private questionModel myQuestionModel = new questionModel (GenericQuestionPageActivity.this);
+private questionObj qObj;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getPicture();
+super.onCreate(savedInstanceState);
         setContentView(R.layout.generic_question_page);
-    }
+        final Button yesButton = (Button) findViewById(R.id.buttonTrue);
+        final Button noButton = (Button) findViewById(R.id.buttonFalse);
+        final Button dunnoButton = (Button) findViewById(R.id.buttonDunno);
+        final Button goBackButton = (Button) findViewById(R.id.buttonGoBackToStart);
+        yesButton.setOnClickListener(new View.OnClickListener() {
 
-    private void getPicture() {
-        new DownloadImageTask().execute();
-    }
+                                         @Override
+                                         public void onClick(View v) {
+                                             StartPageActivity.qController.updateTablesWeight();
+                                             Intent intent = getIntent();
+                                             finish();
+                                             startActivity(intent);
+                                         }
 
-    protected class DownloadImageTask extends AsyncTask<Void, Integer, Long> {
-        Bitmap bitmap = null;
-        protected Long doInBackground(Void... urls) {
-            bitmap = DownloadImage("http://www.airbus-shop.com/modules/homeslider/images/763bfe3f0449161ff3786f8d465213d9d72a94f2_a350.png");
 
-            return null;
-        }
+                                     });
+        noButton.setOnClickListener(new View.OnClickListener() {
 
-        protected void onPostExecute(Long result) {
-            if(bitmap != null) {
-                ImageView img = (ImageView) findViewById(R.id.question_image);
-                img.setImageBitmap(bitmap);
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
-        }
+
+
+        });
+        dunnoButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+
+
+        });
+
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(GenericQuestionPageActivity.this, StartPageActivity.class);
+              //  StartPageActivity.qController.resetWeightOfTables();
+                StartPageActivity.qController.resetDb();
+                finish();
+                startActivity(intent);
+            }
+
+
+        });
+        qObj = StartPageActivity.qController.select();
+        Bitmap b = BitmapFactory.decodeResource(getResources(), qObj.getAssociatedDrawable());
+        ImageView view = (ImageView) findViewById(R.id.question_image);
+        TextView textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
+        textViewQuestion.setText(qObj.getQuestionString());
+        view.setImageBitmap(b);
     }
 
-    private Bitmap DownloadImage(String URL) {
-        Bitmap bitmap = null;
-        InputStream in;
-        try {
-            in = OpenHttpConnection(URL);
-            bitmap = BitmapFactory.decodeStream(in);
-            in.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        return bitmap;
-    }
 
-    private InputStream OpenHttpConnection(String urlString) throws IOException {
-        InputStream in = null;
 
-        int response;
-
-        URL url = new URL(urlString);
-        URLConnection conn = url.openConnection();
-
-        if (!(conn instanceof HttpURLConnection))
-            throw new IOException("Not an HTTP connection");
-
-        try {
-            HttpURLConnection httpConn = (HttpURLConnection) conn;
-            httpConn.setAllowUserInteraction(false);
-            httpConn.setInstanceFollowRedirects(true);
-            httpConn.setRequestMethod("GET");
-            httpConn.connect();
-
-            response = httpConn.getResponseCode();
-            if (response == HttpURLConnection.HTTP_OK)
-                in = httpConn.getInputStream();
-           Log.d ("mydebug", "debug message");
-        } catch (Exception ex) {
-            throw new IOException("Error connecting");
-        }
-        return in;
-    }
 }
